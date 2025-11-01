@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birth Weight Predictor</title>
+  <style>
+    /* ---------- GLOBAL STYLES ---------- */
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #c471f5, #fa71cd);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    /* ---------- CARD CONTAINER ---------- */
+    .container {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 30px;
+      font-size: 26px;
+      letter-spacing: 1px;
+    }
+
+    /* ---------- INPUT STYLING ---------- */
+    .form-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 12px 12px 10px;
+      font-size: 16px;
+      border: none;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+      background: transparent;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    input[type="number"]:focus {
+      border-bottom: 2px solid #fff;
+      outline: none;
+    }
+
+    label {
+      position: absolute;
+      left: 10px;
+      top: 12px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+      pointer-events: none;
+      transition: 0.3s;
+    }
+
+    input:focus ~ label,
+    input:valid ~ label {
+      top: -10px;
+      left: 8px;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    /* ---------- SUBMIT BUTTON ---------- */
+    input[type="submit"] {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(37, 117, 252, 0.4);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Predict Your Baby's Birth Weight</h1>
+    <form action="/predict" method="post">
+      <div class="form-group">
+        <input type="number" name="gestation" required>
+        <label>Gestation (in days)</label>
+      </div>
+
+      <div class="form-group">
+        <input type="number" name="parity" required>
+        <label>Parity (no. of previous births)</label>
+      </div>
+
+      <div class="form-group">
+        <input type="number" name="age" required>
+        <label>Mother's Age (in years)</label>
+      </div>
+
+      <div class="form-group">
+        <input type="number" name="height" required>
+        <label>Mother's Height (in inches)</label>
+      </div>
+
+      <div class="form-group">
+        <input type="number" name="weight" required>
+        <label>Mother's Weight (in pounds)</label>
+      </div>
+
+      <div class="form-group">
+        <input type="number" name="smoke" min="0" max="1" required>
+        <label>Smoking Status (0 = Non-smoker, 1 = Smoker)</label>
+      </div>
+
+      <input type="submit" value="Predict Birth Weight">
+    </form>
+    <h3>Predicted Birth Weight: {{prediction}}</h3>
+  </div>
+</body>
+</html>
